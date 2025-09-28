@@ -1,10 +1,5 @@
 package com.example.amartinezloginapp
 
-
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -23,20 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            MaterialTheme {
-                    AppNavigation()
-                }
-            }
-        }
-    }
-
 @Composable
-fun LoginScreen(onSignUpClick: () -> Unit) {
+fun RegisterScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -45,7 +27,7 @@ fun LoginScreen(onSignUpClick: () -> Unit) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 236.dp)
+                .padding(top = 180.dp)
                 .background(
                     Color.White,
                     shape = RoundedCornerShape(topStart = 100.dp, topEnd = 0.dp),
@@ -54,7 +36,7 @@ fun LoginScreen(onSignUpClick: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Login",
+                text = "Sign Up",
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black
@@ -68,19 +50,67 @@ fun LoginScreen(onSignUpClick: () -> Unit) {
 
 
 
+
+
+
+
+
+
+            var firstName by remember { mutableStateOf("") }
+            OutlinedTextField(
+                value = firstName,
+                onValueChange = { firstName = it },
+                label = { Text("First name") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+
+
+
+
+
+
+
+
+
+
+            var lastName by remember { mutableStateOf("") }
+            OutlinedTextField(
+                value = lastName,
+                onValueChange = { lastName = it },
+                label = { Text("Last name") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
+            )
+
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+
+
+
+
+
+
+
+
+
+
             var email by remember { mutableStateOf("") }
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
                 label = { Text("Email") },
-                placeholder = { Text("Enter your email") },
                 singleLine = true,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp)
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
             )
 
+
             Spacer(modifier = Modifier.height(16.dp))
+
 
 
 
@@ -93,16 +123,43 @@ fun LoginScreen(onSignUpClick: () -> Unit) {
                 value = password,
                 onValueChange = { password = it },
                 label = { Text("Password") },
-                placeholder = { Text("Enter your password") },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp)
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+
+
+
+
+
+
+
+
+
+
+
+
+            var confirmPassword by remember { mutableStateOf("") }
+            OutlinedTextField(
+                value = confirmPassword,
+                onValueChange = { confirmPassword = it },
+                label = { Text("Confirm password") },
+                singleLine = true,
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
             )
 
             Spacer(modifier = Modifier.height(30.dp))
+
+
+
+
+
 
 
 
@@ -119,51 +176,31 @@ fun LoginScreen(onSignUpClick: () -> Unit) {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Login",
+                    text = "Sign Up",
                     color = Color.White,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium
                 )
             }
 
-            Spacer(modifier = Modifier.height(170.dp))
+            Spacer(modifier = Modifier.height(50.dp))
 
 
-
-
-
-
-            TextButton(onClick = onSignUpClick) {
-                Text(
-                    text = "Don’t have any account? Sign Up",
-                    color = Color.Gray,
-                    fontSize = 14.sp,
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(
+                text = "Already have any account? Sign In",
+                color = Color.Gray,
+                fontSize = 14.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(10.dp)
+            )
         }
-
-
-
-
-
-
-
-        Box(
-            modifier = Modifier
-                .padding(start = 100.dp)
-                .width(180.dp)
-                .height(180.dp),
-            contentAlignment = Alignment.Center
-        ) { }
     }
 }
 
-
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun LoginScreenPreview() {
+fun RegisterScreenPreview() {
     MaterialTheme {
-        LoginScreen(onSignUpClick = {})
+        RegisterScreen()
     }
 }
